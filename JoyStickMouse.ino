@@ -12,8 +12,8 @@ ezButton button(SW_PIN);
 
 
 // ---- JOYSTICK CALIBRATION ----
-const int xCenter = 1771;
-const int yCenter = 1840;
+int xCentre = 1771;
+int yCentre = 1840;
 
 const int deadZone = 120;       // small dead zone
 const int maxAnalog = 4095;
@@ -43,16 +43,16 @@ void loop() {
   valueX = analogRead(VRX_PIN);
   valueY = analogRead(VRY_PIN);
 
-  int xFromCenter = valueX - xCenter;
-  int yFromCenter = valueY - yCenter;
+  int xFromCentre = valueX - xCentre;
+  int yFromCentre = valueY - yCentre;
 
 
-  if (abs(xFromCenter) < deadZone) xFromCenter = 0;
-  if (abs(yFromCenter) < deadZone) yFromCenter = 0;
+  if (abs(xFromCentre) < deadZone) xFromCentre = 0;
+  if (abs(yFromCentre) < deadZone) yFromCentre = 0;
 
 
-  mouseSpeedX = map(xFromCenter, -2000, 2000, -7, 7);
-  mouseSpeedY = map(yFromCenter, -2000, 2000, 7, -7);  // invert Y for mouse
+  mouseSpeedX = map(xFromCentre, -2000, 2000, -7, 7);
+  mouseSpeedY = map(yFromCentre, -2000, 2000, 7, -7);  // invert Y for mouse
 
 
   mouseSpeedX = constrain(mouseSpeedX, -7, 7);
@@ -84,4 +84,16 @@ void loop() {
   Serial.println(mouseSpeedY);
 
   delay(10);
+}
+
+void calibrate() 
+{
+  Serial.println("return mouse to centre");
+  delay(1000);
+  xCentre = analogRead(VRX_PIN);
+  yCentre = analogRead(VRY_PIN);
+
+  println("new X centre: " + xCentre);
+  println("new Y centre: " + yCentre);
+  
 }
