@@ -102,11 +102,14 @@ void loop() {
 void calibrate()
 {
   Serial.println("return mouse to centre");
-  delay(1000);
+  delay(3000);
   xCentre = analogRead(VRX_PIN);
   yCentre = analogRead(VRY_PIN);
   //centres mouse
-  println("new X centre: " + xCentre);
-  println("new Y centre: " + yCentre);
+  Serial.print("new X centre: ");
+  Serial.println(xCentre);
+  Serial.print("new Y centre: ");
+  Serial.println(yCentre);
+
   
 }
