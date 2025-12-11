@@ -6,14 +6,14 @@ BleMouse bleMouse; //makes this a bleMouse
 // joystick varibles
 #define VRX_PIN  32
 #define VRY_PIN  33
-#define SW_PIN   18
+#define SW_PIN   18 //joystick button
 
 //button decloration
 #define CB_PIN 4
 #define LM_PIN 36
 #define RM_PIN 39
 
-ezButton jsButton(SW_PIN);
+ezButton mmButton(SW_PIN);
 ezButton cbButton(CB_PIN);
 ezButton lmButton(LM_PIN);
 ezButton rmButton(RM_PIN);
@@ -35,7 +35,7 @@ void setup() {
   analogSetAttenuation(ADC_11db); // does something, i dont really know
 
   //button debounce 
-  jsButton.setDebounceTime(50);
+  mmButton.setDebounceTime(50);
   cbButton.setDebounceTime(50);
   lmButton.setDebounceTime(50);
   rmButton.setDebounceTime(50);
@@ -43,7 +43,7 @@ void setup() {
 
 void loop() {
   //button loops
-  jsButton.loop();
+  mmButton.loop();
   cbButton.loop();
   lmButton.loop();
   rmButton.loop();
@@ -63,16 +63,20 @@ void loop() {
 
   if (bleMouse.isConnected()) {
   // big long if button pressed chain 
-    if (jsButton.isPressed()) {
-      bleMouse.click(MOUSE_LEFT);
+    if (mmButton.isPressed()) {
+      bleMouse.click(MOUSE_MIDDLE);
+      
     } else if (cbButton.isPressed()) 
     {
       calibrate();
+      
     } else if (lmButton.isPressed()) 
     {
       bleMouse.click(MOUSE_LEFT);
+      
     } else if (rmButton.isPressed()) 
     {
+      
       bleMouse.click(MOUSE_RIGHT);
     }
 
