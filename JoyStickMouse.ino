@@ -10,10 +10,13 @@ BleMouse bleMouse; //makes this a bleMouse
 
 //button decloration
 #define CB_PIN 4
+#define LM_PIN 36
+#define RM_PIN 39
 
 ezButton jsButton(SW_PIN);
 ezButton cbButton(CB_PIN);
-
+ezButton lmButton(LM_PIN);
+ezButton rmButton(RM_PIN);
 //joystick maths stuff
 int xCentre = 1771;
 int yCentre = 1840;
@@ -34,12 +37,16 @@ void setup() {
   //button debounce 
   jsButton.setDebounceTime(50);
   cbButton.setDebounceTime(50);
+  lmButton.setDebounceTime(50);
+  rmButton.setDebounceTime(50);
 }
 
 void loop() {
   //button loops
   jsButton.loop();
   cbButton.loop();
+  lmButton.loop();
+  rmButton.loop();
 
   //joystick finding varibles 
   valueX = analogRead(VRX_PIN);
@@ -61,7 +68,15 @@ void loop() {
     } else if (cbButton.isPressed()) 
     {
       calibrate();
+    } else if (lmButton.isPressed()) 
+    {
+      bleMouse.click(MOUSE_LEFT);
+    } else if (rmButton.isPressed()) 
+    {
+      bleMouse.click(MOUSE_RIGHT);
     }
+
+    
     if (mouseSpeedX != 0 || mouseSpeedY != 0) {
       bleMouse.move(mouseSpeedX * sensitivity, -mouseSpeedY * sensitivity);
     }
