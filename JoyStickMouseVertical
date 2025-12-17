@@ -82,7 +82,7 @@ void loop() {
 
     
     if (mouseSpeedX != 0 || mouseSpeedY != 0) {
-      bleMouse.move(mouseSpeedY * sensitivity, mouseSpeedX * sensitivity);
+      bleMouse.move(-mouseSpeedY * sensitivity, -mouseSpeedX * sensitivity);
     }
   }
 
