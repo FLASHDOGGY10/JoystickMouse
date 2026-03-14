@@ -5,8 +5,8 @@ BleMouse bleMouse; //makes this a bleMouse
 
 // joystick varibles
 #define VRX_PIN  32
-#define VRY_PIN  33
-#define SW_PIN   18 //joystick button
+#define VRY_PIN  0
+#define SW_PIN   2 //joystick button
 
 //button decloration
 #define CB_PIN 4
